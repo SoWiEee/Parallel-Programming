@@ -24,7 +24,7 @@ void linear_search_sequential(int data[], int key, int num)
 
 int main()
 {
-    // 將資料量放大到 1 億，否則搜尋時間太短無法比較出差異
+    // 將資料量放大到 1 億
     int maxn = 100000000; 
     int key = 98765432; // 設定一個靠近陣列尾端的值
     int *a = (int*)malloc(maxn * sizeof(int));
