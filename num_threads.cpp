@@ -14,13 +14,18 @@ int main(int argc, char *argv[])
     // 開啟平行區塊
     #pragma omp parallel
     {
-        printf("Hello, world from thread: %d.\n", omp_get_thread_num());
-        printf("# of proc = %d\n", omp_get_num_procs());
-        printf("# of threads = %d\n", omp_get_num_threads());
+        // 1. 取得當前執行緒的 Index (編號永遠從 0 開始)
+        int thread_id = omp_get_thread_num();
+        
+        // 2. 根據知道的 Index，讓執行緒各自做不同的事情 (do things accordingly)
+        if (thread_id == 0) {
+            // Index 為 0 的必定是 Master Thread
+            printf("Thread %d: I am the Master thread. I can assign tasks!\n", thread_id);
+        } else {
+            // Index 大於 0 的是 Worker Threads
+            printf("Thread %d: I am a Worker thread. I am doing my job.\n", thread_id);
+        }
     }
-    
-    // 離開平行區塊後，由 Master thread (通常是 thread 0) 繼續執行
-    printf("Master thread: %d\n", omp_get_thread_num());
     
     return 0;
 }
